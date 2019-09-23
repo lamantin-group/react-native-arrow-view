@@ -42,8 +42,8 @@ export default class App extends Component {
           width: '100%',
         }}>
         <ArrowView />
-        <DraggableView text="Start" />
-        <DraggableView text="End" />
+        <DraggableView onChanges={(x, y) => {}} text="Start" />
+        <DraggableView onChanges={(x, y) => {}} text="End" />
       </SafeAreaView>
     )
   }

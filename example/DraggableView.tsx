@@ -15,14 +15,13 @@ import { lchown } from 'fs'
 interface DraggableViewProps {
   style?: ViewStyle
   text: string
+  onChanges: (x: number, y: number) => void
 }
 
 interface DraggableViewState {
   pan: Animated.ValueXY
   scale: Animated.Value
 }
-
-const { width, height } = Dimensions.get('window')
 
 export default class DraggableView extends Component<DraggableViewProps, DraggableViewState> {
   static defaultProps = {
@@ -111,10 +110,13 @@ export default class DraggableView extends Component<DraggableViewProps, Draggab
           onLayout={({ nativeEvent }) => {
             if (this.marker) {
               this.marker.measure((x, y, width, height, pageX, pageY) => {
+                const mX = Math.round(pageX).toFixed(0)
+                const mY = Math.round(pageY).toFixed(0)
                 this.setState({
-                  x: Math.round(pageX).toFixed(0),
-                  y: Math.round(pageY).toFixed(0),
+                  x: mX,
+                  y: mY,
                 })
+                this.props.onChanges(mX, mY)
               })
             }
           }}
