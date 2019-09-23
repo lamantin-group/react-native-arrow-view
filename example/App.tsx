@@ -11,6 +11,7 @@
 import DraggableView from './DraggableView'
 import React, { Component } from 'react'
 import { NativeModules, SafeAreaView, StyleSheet, Text } from 'react-native'
+import { ArrowView } from './ArrowView'
 
 const styles = StyleSheet.create({
   h1: {
@@ -31,7 +32,6 @@ export default class App extends Component {
   }
 
   render() {
-    const { x, y } = this.state
     return (
       <SafeAreaView
         style={{
@@ -41,6 +41,7 @@ export default class App extends Component {
           height: '100%',
           width: '100%',
         }}>
+        <ArrowView />
         <DraggableView text="Start" />
         <DraggableView text="End" />
       </SafeAreaView>

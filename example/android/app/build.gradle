@@ -177,6 +177,7 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_art')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.facebook.react:react-native:+'
     implementation project(path: ':android.react-native-library')  // From node_modules

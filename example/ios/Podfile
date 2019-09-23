@@ -30,6 +30,8 @@ target 'example' do
   # todo: change to node_modules path in real application
   pod 'MyFramework', :path => '../../ios/MyFramework.podspec'
 
+  pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
+
   target 'exampleTests' do
     inherit! :search_paths
     # Pods for testing
