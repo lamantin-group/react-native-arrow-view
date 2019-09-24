@@ -14,7 +14,7 @@ export class Measurable extends PureComponent<DraggableViewProps> {
       <View
         style={{ borderColor: 'red', borderWidth: 1 }}
         ref={ref => (this.marker = ref)}
-        onLayout={({ nativeEvent }) => {
+        onLayout={() => {
           console.warn('onMeasure')
 
           if (this.marker) {
