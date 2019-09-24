@@ -105,10 +105,10 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
    *             (not the arrowhead, the arrow itself).
    * @param radius The radius of the arrowhead. This controls how "thick" the arrowhead looks.
    */
-  arrowheadPath(from: Pixel, to: Pixel, radius: number): Path {
+  arrowheadPath(from: Pixel, to: Pixel, radius: number) {
     const path = new Path()
-    const x_center = to.x
-    const y_center = to.y
+    const xCenter = to.x
+    const yCenter = to.y
 
     let angle
     let x
@@ -117,20 +117,20 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     // path.beginPath()
 
     angle = Math.atan2(to.y - from.y, to.x - from.x)
-    x = radius * Math.cos(angle) + x_center
-    y = radius * Math.sin(angle) + y_center
+    x = radius * Math.cos(angle) + xCenter
+    y = radius * Math.sin(angle) + yCenter
 
     path.moveTo(x, y)
 
     angle += (1.0 / 3.0) * (2 * Math.PI)
-    x = radius * Math.cos(angle) + x_center
-    y = radius * Math.sin(angle) + y_center
+    x = radius * Math.cos(angle) + xCenter
+    y = radius * Math.sin(angle) + yCenter
 
     path.lineTo(x, y)
 
     angle += (1.0 / 3.0) * (2 * Math.PI)
-    x = radius * Math.cos(angle) + x_center
-    y = radius * Math.sin(angle) + y_center
+    x = radius * Math.cos(angle) + xCenter
+    y = radius * Math.sin(angle) + yCenter
 
     path.lineTo(x, y)
 
