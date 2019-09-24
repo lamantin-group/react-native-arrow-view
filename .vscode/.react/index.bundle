@@ -91993,9 +91993,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       LinearGradient = _reactNative.ART.LinearGradient,
       ClippingRectangle = _reactNative.ART.ClippingRectangle;
 
-  var _Dimensions$get = _reactNative.Dimensions.get('window'),
-      width = _Dimensions$get.width,
-      height = _Dimensions$get.height;
+  var window = _reactNative.Dimensions.get('window');
+
+  var screenWidth = window.width;
+  var screenHeight = window.height;
 
   var Pixel = function () {
     function Pixel(x, y) {
@@ -92074,7 +92075,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             curveDelta = _this$props.curveDelta,
             dash = _this$props.dash,
             cap = _this$props.cap,
-            color = _this$props.color;
+            color = _this$props.color,
+            width = _this$props.width;
         var line = new Path();
         var _this$props2 = this.props,
             _this$props2$from = _this$props2.from,
@@ -92096,19 +92098,19 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 142
+            lineNumber: 152
           }
         }, _react.default.createElement(Surface, {
-          width: width,
-          height: height,
+          width: screenWidth,
+          height: screenHeight,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 145
+            lineNumber: 155
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 146
+            lineNumber: 156
           }
         }, _react.default.createElement(Shape, {
           d: line,
@@ -92118,14 +92120,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           strokeCap: cap,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 147
+            lineNumber: 157
           }
         }), _react.default.createElement(Circle, {
           center: from,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 148
+            lineNumber: 158
           }
         }), _react.default.createElement(Shape, {
           d: this.arrowheadPath(from, to, 8),
@@ -92134,14 +92136,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 149
+            lineNumber: 159
           }
         }), __DEV__ && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 155
+            lineNumber: 165
           }
         }))));
       }
@@ -92154,7 +92156,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     dash: [0, 0],
     curveDelta: 80,
     cap: 'round',
-    color: '#000'
+    color: '#000',
+    width: 2
   };
   exports.ArrowView = ArrowView = _wrapComponent("ArrowView")(ArrowView);
 
@@ -92180,7 +92183,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 175
+            lineNumber: 185
           }
         }));
       }

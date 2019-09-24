@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet, Dimensions, ART } from 'react-native'
 import { Color } from 'csstype'
 const { Surface, Shape, Group, Path, Transform, LinearGradient, ClippingRectangle } = ART
-const { width, height } = Dimensions.get('window')
+const window = Dimensions.get('window')
+const screenWidth = window.width
+const screenHeight = window.height
 
 export class Pixel {
   x: number
@@ -44,7 +46,7 @@ interface ArrowViewProps {
   curveDelta: number
 
   /**
-   * Caps for end of line
+   * Caps for end of arrow lines
    */
   cap: 'butt' | 'round' | 'square'
 
@@ -54,6 +56,13 @@ interface ArrowViewProps {
    * @default #000
    */
   color: Color
+
+  /**
+   * Width of arrow
+   *
+   * @default 2
+   */
+  width: number
 }
 
 const maxOf = (first: number, second: number) => Math.max(first, second)
@@ -66,6 +75,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     curveDelta: 80,
     cap: 'round',
     color: '#000',
+    width: 2,
   }
 
   /**
@@ -116,7 +126,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   }
 
   render() {
-    const { curveDelta, dash, cap, color } = this.props
+    const { curveDelta, dash, cap, color, width } = this.props
     const line = new Path()
     const { from = this.zero, to = this.zero } = this.props
 
@@ -142,7 +152,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
       <View
         pointerEvents="none"
         style={{ zIndex: 100, borderColor: 'red', borderWidth: 1, position: 'absolute' }}>
-        <Surface width={width} height={height}>
+        <Surface width={screenWidth} height={screenHeight}>
           <Group>
             <Shape d={line} strokeWidth={2} stroke={color} strokeDash={dash} strokeCap={cap} />
             <Circle center={from} radius={4} />
