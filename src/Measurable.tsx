@@ -6,19 +6,7 @@ export type DraggableViewProps = {
 }
 
 export class Measurable extends PureComponent<DraggableViewProps> {
-  marker: View | null
-
-  onLayout = ({ nativeEvent }) => {
-    console.warn('onMeasure')
-
-    if (this.marker) {
-      this.marker.measure((x, y, width, height, pageX, pageY) => {
-        const mX = Math.round(pageX).toFixed(0)
-        const mY = Math.round(pageY).toFixed(0)
-        onMeasure && onMeasure(mX, mY, width, height)
-      })
-    }
-  }
+  marker: View | null = null
 
   render() {
     const { onMeasure } = this.props

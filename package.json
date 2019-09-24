@@ -1,14 +1,21 @@
 {
-  "name": "react-native-library",
+  "name": "react-native-arrow-view",
   "version": "1.0.0",
   "author": "lamantin",
-  "description": "Library bootstrap",
+  "description": "Arrow pointer view between react-native components",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/USERNAME/REPOSITORY.git"
+    "url": "git+https://github.com/lamantin-group/react-native-arrow-view.git"
   },
   "keywords": [
+    "react-native-arrow-view",
+    "react-native-arrow",
+    "arrow",
+    "shape",
+    "art",
+    "ui",
+    "pointer",
     "react-native",
     "react-native-library"
   ],
