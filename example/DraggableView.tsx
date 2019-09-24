@@ -68,8 +68,8 @@ export default class DraggableView extends Component<DraggableViewProps, Draggab
         //   layoutY: dy._value,
         // })
         this.setState({
-          x: locationX,
-          y: locationY,
+          x: Math.round(locationX).toFixed(0),
+          y: Math.round(locationY).toFixed(0),
         })
       },
 
@@ -98,12 +98,12 @@ export default class DraggableView extends Component<DraggableViewProps, Draggab
     const rotate = '0deg'
 
     // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
-    const imageStyle = { transform: [{ translateX }, { translateY }, { rotate }] }
+    const imageStyle = { transform: [{ translateX }, { translateY }, { rotate }, { scale }] }
 
     return (
       <Animated.View style={imageStyle} {...this._panResponder.panHandlers}>
         <View
-          style={{ height: 100, minWidth: 200, maxWidth: 200 }}
+          style={{ height: 100, width: 100 }}
           ref={ref => {
             this.marker = ref
           }}
