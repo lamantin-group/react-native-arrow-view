@@ -37,6 +37,7 @@ render() {
 
 If you dont know coordinates of your view, you can use `Measurable` component, that can calculate it for you
 ```js
+import { View, Text } from 'react-native'
 import { ArrowView, Measurable } from 'react-native-arrow-view'
 
 render() {
