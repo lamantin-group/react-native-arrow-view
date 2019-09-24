@@ -3,13 +3,6 @@
 var onmessage=null, self=global;
 // Cache Node's original require as __debug__.require
 global.__debug__={require: require};
-// avoid Node's GLOBAL deprecation warning
-Object.defineProperty(global, "GLOBAL", {
-    configurable: true,
-    writable: true,
-    enumerable: true,
-    value: global
-});
 // Prevent leaking process.versions from debugger process to
 // worker because pure React Native doesn't do that and some packages as js-md5 rely on this behavior
 Object.defineProperty(process, "versions", {
@@ -99,6 +92,18 @@ console.trace = (function() {
         }
     };
 })();
+// As worker is ran in node, it breaks broadcast-channels package approach of identifying if it’s ran in node:
+// https://github.com/pubkey/broadcast-channel/blob/master/src/util.js#L64
+// To avoid it if process.toString() is called if will return empty string instead of [object process].
+var nativeObjectToString = Object.prototype.toString;
+Object.prototype.toString = function() {
+    if (this === process) {
+        return '';
+    } else {
+        return nativeObjectToString.call(this);
+    }
+}
+
 
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.

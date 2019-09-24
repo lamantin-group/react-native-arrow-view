@@ -11,7 +11,7 @@
 import DraggableView from './DraggableView'
 import React, { Component } from 'react'
 import { NativeModules, SafeAreaView, StyleSheet, Text } from 'react-native'
-import { ArrowView } from './ArrowView'
+import { ArrowView, Pixel } from './ArrowView'
 import Heart from './Heart'
 
 const styles = StyleSheet.create({
@@ -49,7 +49,10 @@ export default class App extends Component {
           height: '100%',
           width: '100%',
         }}>
-        <ArrowView from={this.state.start} to={this.state.end} />
+        <ArrowView
+          from={new Pixel(this.state.start.x, this.state.start.y)}
+          to={new Pixel(this.state.end.x, this.state.end.y)}
+        />
         <DraggableView
           onChanges={(x, y) =>
             this.setState({
