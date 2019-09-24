@@ -10,7 +10,7 @@
 
 import DraggableView from './DraggableView'
 import React, { Component } from 'react'
-import { NativeModules, SafeAreaView, StyleSheet, Text } from 'react-native'
+import { View, NativeModules, SafeAreaView, StyleSheet, Text, Slider } from 'react-native'
 import { ArrowView, Pixel } from './ArrowView'
 import Heart from './Heart'
 
@@ -36,40 +36,74 @@ export default class App extends Component {
       x: 0,
       y: 0,
     },
+    dashLength: 4,
+    dashGap: 8,
   }
 
   render() {
+    const { dashLength, dashGap } = this.state
     return (
       <SafeAreaView
         style={{
           // flexGrow: 1,
           backgroundColor: '#F5FCFF',
           // backgroundColor: 'transparent',
-          alignItems: 'center',
           height: '100%',
           width: '100%',
         }}>
+        <View
+          style={{
+            paddingHorizontal: 16,
+          }}>
+          <Text>Dash length = {dashLength}</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={20}
+            value={dashLength}
+            onValueChange={value =>
+              this.setState({
+                dashLength: value,
+              })
+            }
+          />
+
+          <Text>Dash gap = {dashGap}</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={20}
+            value={dashGap}
+            onValueChange={value =>
+              this.setState({
+                dashGap: value,
+              })
+            }
+          />
+        </View>
+
         <ArrowView
-          dash={[10, 10]}
+          dash={[dashLength, dashGap]}
           from={new Pixel(this.state.start.x, this.state.start.y)}
           to={new Pixel(this.state.end.x, this.state.end.y)}
         />
-        <DraggableView
-          onChanges={(x, y) =>
-            this.setState({
-              start: { x, y },
-            })
-          }
-          text="Start"
-        />
-        <DraggableView
-          onChanges={(x, y) =>
-            this.setState({
-              end: { x, y },
-            })
-          }
-          text="End"
-        />
+
+        <View style={{ alignItems: 'center' }}>
+          <DraggableView
+            onChanges={(x, y) =>
+              this.setState({
+                start: { x, y },
+              })
+            }
+            text="Start"
+          />
+          <DraggableView
+            onChanges={(x, y) =>
+              this.setState({
+                end: { x, y },
+              })
+            }
+            text="End"
+          />
+        </View>
       </SafeAreaView>
     )
   }

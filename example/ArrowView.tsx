@@ -155,14 +155,14 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
         <Surface width={screenWidth} height={screenHeight}>
           <Group>
             <Shape d={line} strokeWidth={2} stroke={color} strokeDash={dash} strokeCap={cap} />
-            <Circle center={from} radius={4} />
+            <Circle center={from} radius={4} color={color} />
             <Shape
               d={this.arrowheadPath(from, to, 8)}
               strokeWidth={2}
               stroke={color}
               fill={color}
             />
-            {__DEV__ && <Circle center={curve} radius={4} />}
+            {__DEV__ && <Circle center={curve} radius={4} color={color} />}
           </Group>
         </Surface>
       </View>
@@ -173,15 +173,16 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
 export class Circle extends PureComponent<{
   radius: number
   center: Pixel
+  color: Color
 }> {
   render() {
-    const { center, radius, ...rest } = this.props
+    const { center, radius, color, ...rest } = this.props
 
     const circle = new Path()
       .move(center.x, center.y)
       .arc(0, radius * 2, radius)
       .arc(0, radius * -2, radius)
 
-    return <Shape {...rest} d={circle} strokeWidth={2} stroke="#000" />
+    return <Shape {...rest} d={circle} strokeWidth={2} stroke={color} fill={color} />
   }
 }
