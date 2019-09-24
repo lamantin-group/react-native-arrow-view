@@ -3,17 +3,13 @@ import { View, StyleSheet, Dimensions, ART } from 'react-native'
 const { Surface, Shape, Group, Path, Transform, LinearGradient, ClippingRectangle } = ART
 const { width, height } = Dimensions.get('window')
 
-type Pixel = { x: number; y: number }
+export type Pixel = { x: number; y: number }
+
 interface ArrowViewProps {
   from: Pixel
   to: Pixel
 }
 
-const styles = StyleSheet.create({
-  surface: {
-    backgroundColor: '#d39494',
-  },
-})
 export class ArrowView extends PureComponent<ArrowViewProps> {
   zero: Pixel = { x: 0, y: 0 }
   render() {
@@ -29,9 +25,26 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
               strokeWidth={2}
               stroke="#000"
             />
+            <Circle center={from} radius={4} />
           </Group>
         </Surface>
       </View>
     )
+  }
+}
+
+export class Circle extends PureComponent<{
+  radius: number
+  center: Pixel
+}> {
+  render() {
+    const { center, radius, ...rest } = this.props
+
+    const circle = new Path()
+      .move(center.x, center.y)
+      .arc(0, radius * 2, radius)
+      .arc(0, radius * -2, radius)
+
+    return <Shape {...rest} d={circle} strokeWidth={2} stroke="#000" />
   }
 }
