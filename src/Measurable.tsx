@@ -6,6 +6,8 @@ export type DraggableViewProps = {
 }
 
 export class Measurable extends PureComponent<DraggableViewProps> {
+  marker: View | null
+
   onLayout = ({ nativeEvent }) => {
     console.warn('onMeasure')
 
@@ -20,11 +22,6 @@ export class Measurable extends PureComponent<DraggableViewProps> {
 
   render() {
     const { onMeasure } = this.props
-    const childrens = React.Children.map(this.props.children, child => {
-      child.props.onLayout = this.onLayout
-      child.onLayout = this.onLayout
-      return child
-    })
     return (
       <View
         style={{ borderColor: 'red', borderWidth: 1 }}
@@ -36,11 +33,11 @@ export class Measurable extends PureComponent<DraggableViewProps> {
             this.marker.measure((x, y, width, height, pageX, pageY) => {
               const mX = Math.round(pageX).toFixed(0)
               const mY = Math.round(pageY).toFixed(0)
-              onMeasure && onMeasure(mX, mY, width, height)
+              onMeasure && onMeasure(+mX, +mY, width, height)
             })
           }
         }}>
-        {childrens}
+        {this.props.children}
       </View>
     )
   }

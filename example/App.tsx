@@ -8,33 +8,12 @@
  * @format
  */
 
-import DraggableView from './DraggableView'
 import React, { Component } from 'react'
-import {
-  View,
-  NativeModules,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  Slider,
-  TouchableOpacity,
-} from 'react-native'
-import { ArrowView, Pixel } from './ArrowView'
-import Heart from './Heart'
-import { Measurable } from 'react-native-library'
-const styles = StyleSheet.create({
-  h1: {
-    fontSize: 24,
-  },
-})
-const { NativeLibrary } = NativeModules
+import { SafeAreaView, Slider, Text, TouchableOpacity, View } from 'react-native'
+import DraggableView from './DraggableView'
+import { ArrowView, Pixel } from 'react-native-library'
 
 export default class App extends Component {
-  componentDidMount() {
-    console.log(NativeModules)
-    console.log(NativeLibrary)
-  }
-
   state = {
     start: {
       x: 0,

@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
-import { View, StyleSheet, Dimensions, ART } from 'react-native'
 import { Color } from 'csstype'
-const { Surface, Shape, Group, Path, Transform, LinearGradient, ClippingRectangle } = ART
+import React, { PureComponent } from 'react'
+import { ART, Dimensions, View } from 'react-native'
+const { Surface, Shape, Group, Path } = ART
 const window = Dimensions.get('window')
 const screenWidth = window.width
 const screenHeight = window.height
@@ -88,7 +88,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   }
 
   /**
-   * Draw an arrowhead on a line on an HTML5 canvas.
+   * Draw an arrowhead on a line on an canvas
    *
    * Based almost entirely off of http://stackoverflow.com/a/36805543/281460 with some modifications
    * for readability and ease of use.
