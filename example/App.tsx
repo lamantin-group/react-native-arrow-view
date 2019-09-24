@@ -10,7 +10,15 @@
 
 import DraggableView from './DraggableView'
 import React, { Component } from 'react'
-import { View, NativeModules, SafeAreaView, StyleSheet, Text, Slider } from 'react-native'
+import {
+  View,
+  NativeModules,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Slider,
+  TouchableOpacity,
+} from 'react-native'
 import { ArrowView, Pixel } from './ArrowView'
 import Heart from './Heart'
 
@@ -38,16 +46,19 @@ export default class App extends Component {
     },
     dashLength: 4,
     dashGap: 8,
+    colorIndex: 0,
+    curveDelta: 50,
   }
 
+  colors = ['black', 'green', 'yellow', 'blue']
+
   render() {
-    const { dashLength, dashGap } = this.state
+    const { dashLength, dashGap, curveDelta } = this.state
+    const color = this.colors[this.state.colorIndex]
     return (
       <SafeAreaView
         style={{
-          // flexGrow: 1,
           backgroundColor: '#F5FCFF',
-          // backgroundColor: 'transparent',
           height: '100%',
           width: '100%',
         }}>
@@ -78,12 +89,38 @@ export default class App extends Component {
               })
             }
           />
+
+          <Text>Curve delta (pivot) = {curveDelta}</Text>
+          <Slider
+            minimumValue={-100}
+            maximumValue={100}
+            value={curveDelta}
+            onValueChange={value =>
+              this.setState({
+                curveDelta: value,
+              })
+            }
+          />
+
+          <TouchableOpacity
+            onPress={() =>
+              this.setState({
+                colorIndex:
+                  this.state.colorIndex >= this.colors.length - 1 ? 0 : this.state.colorIndex + 1,
+              })
+            }>
+            <Text style={{ borderColor: '#4f4f4f', borderWidth: 1, padding: 8 }}>
+              Color: {color}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <ArrowView
           dash={[dashLength, dashGap]}
           from={new Pixel(this.state.start.x, this.state.start.y)}
           to={new Pixel(this.state.end.x, this.state.end.y)}
+          color={color}
+          curveDelta={curveDelta}
         />
 
         <View style={{ alignItems: 'center' }}>

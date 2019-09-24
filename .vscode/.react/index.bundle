@@ -91634,8 +91634,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           y: 0
         },
         dashLength: 4,
-        dashGap: 8
+        dashGap: 8,
+        colorIndex: 0,
+        curveDelta: 50
       };
+      _this.colors = ['black', 'green', 'yellow', 'blue'];
       return _this;
     }
 
@@ -91652,7 +91655,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
         var _this$state = this.state,
             dashLength = _this$state.dashLength,
-            dashGap = _this$state.dashGap;
+            dashGap = _this$state.dashGap,
+            curveDelta = _this$state.curveDelta;
+        var color = this.colors[this.state.colorIndex];
         return _react.default.createElement(_reactNative.SafeAreaView, {
           style: {
             backgroundColor: '#F5FCFF',
@@ -91661,7 +91666,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 46
+            lineNumber: 59
           }
         }, _react.default.createElement(_reactNative.View, {
           style: {
@@ -91669,12 +91674,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 67
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 71
           }
         }, "Dash length = ", dashLength), _react.default.createElement(_reactNative.Slider, {
           minimumValue: 0,
@@ -91687,12 +91692,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 72
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 83
           }
         }, "Dash gap = ", dashGap), _react.default.createElement(_reactNative.Slider, {
           minimumValue: 0,
@@ -91705,15 +91710,55 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 84
           }
-        })), _react.default.createElement(_ArrowView.ArrowView, {
+        }), _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 95
+          }
+        }, "Curve delta (pivot) = ", curveDelta), _react.default.createElement(_reactNative.Slider, {
+          minimumValue: -100,
+          maximumValue: 100,
+          value: curveDelta,
+          onValueChange: function onValueChange(value) {
+            return _this2.setState({
+              curveDelta: value
+            });
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 96
+          }
+        }), _react.default.createElement(_reactNative.TouchableOpacity, {
+          onPress: function onPress() {
+            return _this2.setState({
+              colorIndex: _this2.state.colorIndex >= _this2.colors.length - 1 ? 0 : _this2.state.colorIndex + 1
+            });
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 107
+          }
+        }, _react.default.createElement(_reactNative.Text, {
+          style: {
+            borderColor: '#4f4f4f',
+            borderWidth: 1,
+            padding: 8
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          }
+        }, "Color: ", color))), _react.default.createElement(_ArrowView.ArrowView, {
           dash: [dashLength, dashGap],
           from: new _ArrowView.Pixel(this.state.start.x, this.state.start.y),
           to: new _ArrowView.Pixel(this.state.end.x, this.state.end.y),
+          color: color,
+          curveDelta: curveDelta,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 120
           }
         }), _react.default.createElement(_reactNative.View, {
           style: {
@@ -91721,7 +91766,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 89
+            lineNumber: 128
           }
         }, _react.default.createElement(_DraggableView.default, {
           onChanges: function onChanges(x, y) {
@@ -91735,7 +91780,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "Start",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 90
+            lineNumber: 129
           }
         }), _react.default.createElement(_DraggableView.default, {
           onChanges: function onChanges(x, y) {
@@ -91749,7 +91794,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "End",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 98
+            lineNumber: 137
           }
         })));
       }
