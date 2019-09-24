@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet, Dimensions, ART } from 'react-native'
+import { Color } from 'csstype'
 const { Surface, Shape, Group, Path, Transform, LinearGradient, ClippingRectangle } = ART
 const { width, height } = Dimensions.get('window')
 
@@ -42,7 +43,17 @@ interface ArrowViewProps {
    */
   curveDelta: number
 
+  /**
+   * Caps for end of line
+   */
   cap: 'butt' | 'round' | 'square'
+
+  /**
+   * Color of arrow
+   *
+   * @default #000
+   */
+  color: Color
 }
 
 const maxOf = (first: number, second: number) => Math.max(first, second)
@@ -54,6 +65,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     dash: [0, 0],
     curveDelta: 80,
     cap: 'round',
+    color: '#000',
   }
 
   /**
@@ -104,7 +116,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   }
 
   render() {
-    const { curveDelta, dash, cap } = this.props
+    const { curveDelta, dash, cap, color } = this.props
     const line = new Path()
     const { from = this.zero, to = this.zero } = this.props
 
@@ -132,9 +144,14 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
         style={{ zIndex: 100, borderColor: 'red', borderWidth: 1, position: 'absolute' }}>
         <Surface width={width} height={height}>
           <Group>
-            <Shape d={line} strokeWidth={2} stroke="#000" strokeDash={dash} strokeCap={cap} />
+            <Shape d={line} strokeWidth={2} stroke={color} strokeDash={dash} strokeCap={cap} />
             <Circle center={from} radius={4} />
-            <Shape d={this.arrowheadPath(from, to, 8)} strokeWidth={2} stroke="#000" />
+            <Shape
+              d={this.arrowheadPath(from, to, 8)}
+              strokeWidth={2}
+              stroke={color}
+              fill={color}
+            />
             {__DEV__ && <Circle center={curve} radius={4} />}
           </Group>
         </Surface>

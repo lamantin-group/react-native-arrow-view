@@ -92073,7 +92073,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         var _this$props = this.props,
             curveDelta = _this$props.curveDelta,
             dash = _this$props.dash,
-            cap = _this$props.cap;
+            cap = _this$props.cap,
+            color = _this$props.color;
         var line = new Path();
         var _this$props2 = this.props,
             _this$props2$from = _this$props2.from,
@@ -92095,51 +92096,52 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 130
+            lineNumber: 142
           }
         }, _react.default.createElement(Surface, {
           width: width,
           height: height,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 133
+            lineNumber: 145
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 134
+            lineNumber: 146
           }
         }, _react.default.createElement(Shape, {
           d: line,
           strokeWidth: 2,
-          stroke: "#000",
+          stroke: color,
           strokeDash: dash,
           strokeCap: cap,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 135
+            lineNumber: 147
           }
         }), _react.default.createElement(Circle, {
           center: from,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 136
+            lineNumber: 148
           }
         }), _react.default.createElement(Shape, {
           d: this.arrowheadPath(from, to, 8),
           strokeWidth: 2,
-          stroke: "#000",
+          stroke: color,
+          fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 137
+            lineNumber: 149
           }
         }), __DEV__ && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 138
+            lineNumber: 155
           }
         }))));
       }
@@ -92151,7 +92153,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   ArrowView.defaultProps = {
     dash: [0, 0],
     curveDelta: 80,
-    cap: 'round'
+    cap: 'round',
+    color: '#000'
   };
   exports.ArrowView = ArrowView = _wrapComponent("ArrowView")(ArrowView);
 
@@ -92177,7 +92180,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 158
+            lineNumber: 175
           }
         }));
       }
