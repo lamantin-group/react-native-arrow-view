@@ -9,8 +9,6 @@ interface ArrowViewProps {
   to: Pixel
 }
 
-const surfaceWidth = Dimensions.get('window').width - 16
-const surfaceHeight = surfaceWidth
 const styles = StyleSheet.create({
   surface: {
     backgroundColor: '#d39494',
@@ -21,9 +19,11 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   render() {
     const { from = this.zero, to = this.zero } = this.props
     return (
-      <View style={{ zIndex: 100, borderColor: 'red', borderWidth: 1 }}>
-        <Surface width={surfaceWidth} height={surfaceHeight}>
-          <Group x={surfaceWidth / 2 - 90} y={surfaceHeight / 2 - 70}>
+      <View
+        pointerEvents="none"
+        style={{ zIndex: 100, borderColor: 'red', borderWidth: 1, position: 'absolute' }}>
+        <Surface width={width} height={height}>
+          <Group>
             <Shape
               d={new Path().moveTo(from.x, from.y).lineTo(to.x, to.y)}
               strokeWidth={2}
