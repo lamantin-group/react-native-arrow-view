@@ -21,7 +21,7 @@ import {
 } from 'react-native'
 import { ArrowView, Pixel } from './ArrowView'
 import Heart from './Heart'
-
+import { Measurable } from 'react-native-library'
 const styles = StyleSheet.create({
   h1: {
     fontSize: 24,

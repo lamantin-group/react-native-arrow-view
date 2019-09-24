@@ -2,3 +2,4 @@
 
 export * from './src/MyLibrary'
 export * from './example/ArrowView'
+export * from './src/Measurable'
