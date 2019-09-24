@@ -92039,20 +92039,44 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
       _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(ArrowView)).call.apply(_getPrototypeOf2, [this].concat(args)));
       _this.zero = new Pixel(0, 0);
-      _this.deltaX = 180;
       return _this;
     }
 
     (0, _createClass2.default)(ArrowView, [{
+      key: "arrowheadPath",
+      value: function arrowheadPath(from, to, radius) {
+        var path = new Path();
+        var x_center = to.x;
+        var y_center = to.y;
+        var angle;
+        var x;
+        var y;
+        angle = Math.atan2(to.y - from.y, to.x - from.x);
+        x = radius * Math.cos(angle) + x_center;
+        y = radius * Math.sin(angle) + y_center;
+        path.moveTo(x, y);
+        angle += 1.0 / 3.0 * (2 * Math.PI);
+        x = radius * Math.cos(angle) + x_center;
+        y = radius * Math.sin(angle) + y_center;
+        path.lineTo(x, y);
+        angle += 1.0 / 3.0 * (2 * Math.PI);
+        x = radius * Math.cos(angle) + x_center;
+        y = radius * Math.sin(angle) + y_center;
+        path.lineTo(x, y);
+        path.close();
+        return path;
+      }
+    }, {
       key: "render",
       value: function render() {
+        var curveDelta = this.props.curveDelta;
         var line = new Path();
         var _this$props = this.props,
             _this$props$from = _this$props.from,
             from = _this$props$from === void 0 ? this.zero : _this$props$from,
             _this$props$to = _this$props.to,
             to = _this$props$to === void 0 ? this.zero : _this$props$to;
-        var curveX = maxOf(0, from.toTheLeftOf(to) ? from.x + (to.x - from.x) / 2 - this.deltaX : to.x + (to.x - to.x) / 2 - this.deltaX);
+        var curveX = maxOf(0, from.toTheLeftOf(to) ? from.x + (to.x - from.x) / 2 - curveDelta : to.x + (to.x - to.x) / 2 - curveDelta);
         var curveY = maxOf(0, to.above(from) ? to.y + (from.y - to.y) / 2 : to.y - (to.y - from.y) / 2);
         var curve = new Pixel(curveX, curveY);
         line.moveTo(from.x, from.y);
@@ -92067,41 +92091,50 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 127
           }
         }, _react.default.createElement(Surface, {
           width: width,
           height: height,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 61
+            lineNumber: 130
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 131
           }
         }, _react.default.createElement(Shape, {
           d: line,
           strokeWidth: 2,
           stroke: "#000",
+          strokeDash: [3, 5],
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 132
           }
         }), _react.default.createElement(Circle, {
           center: from,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 133
+          }
+        }), _react.default.createElement(Shape, {
+          d: this.arrowheadPath(from, to, 8),
+          strokeWidth: 2,
+          stroke: "#000",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 134
           }
         }), __DEV__ && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 135
           }
         }))));
       }
@@ -92110,6 +92143,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   }(_react.PureComponent);
 
   exports.ArrowView = ArrowView;
+  ArrowView.defaultProps = {
+    dash: [0, 0],
+    curveDelta: 80
+  };
   exports.ArrowView = ArrowView = _wrapComponent("ArrowView")(ArrowView);
 
   var Circle = function (_PureComponent2) {
@@ -92134,7 +92171,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 155
           }
         }));
       }
