@@ -91636,7 +91636,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         dashLength: 4,
         dashGap: 8,
         colorIndex: 0,
-        curveDelta: 50
+        curveDelta: 50,
+        width: 2
       };
       _this.colors = ['black', 'green', 'yellow', 'blue'];
       return _this;
@@ -91656,7 +91657,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         var _this$state = this.state,
             dashLength = _this$state.dashLength,
             dashGap = _this$state.dashGap,
-            curveDelta = _this$state.curveDelta;
+            curveDelta = _this$state.curveDelta,
+            width = _this$state.width;
         var color = this.colors[this.state.colorIndex];
         return _react.default.createElement(_reactNative.SafeAreaView, {
           style: {
@@ -91666,7 +91668,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 60
           }
         }, _react.default.createElement(_reactNative.View, {
           style: {
@@ -91674,12 +91676,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 67
+            lineNumber: 66
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 70
           }
         }, "Dash length = ", dashLength), _react.default.createElement(_reactNative.Slider, {
           minimumValue: 0,
@@ -91692,12 +91694,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 71
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 82
           }
         }, "Dash gap = ", dashGap), _react.default.createElement(_reactNative.Slider, {
           minimumValue: 0,
@@ -91710,12 +91712,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 83
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 95
+            lineNumber: 94
           }
         }, "Curve delta (pivot) = ", curveDelta), _react.default.createElement(_reactNative.Slider, {
           minimumValue: -100,
@@ -91728,7 +91730,25 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 96
+            lineNumber: 95
+          }
+        }), _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 106
+          }
+        }, "Arrow width = ", width), _react.default.createElement(_reactNative.Slider, {
+          minimumValue: 0,
+          maximumValue: 16,
+          value: width,
+          onValueChange: function onValueChange(value) {
+            return _this2.setState({
+              width: value
+            });
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 107
           }
         }), _react.default.createElement(_reactNative.TouchableOpacity, {
           onPress: function onPress() {
@@ -91738,7 +91758,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 107
+            lineNumber: 118
           }
         }, _react.default.createElement(_reactNative.Text, {
           style: {
@@ -91748,7 +91768,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 114
+            lineNumber: 125
           }
         }, "Color: ", color))), _react.default.createElement(_ArrowView.ArrowView, {
           dash: [dashLength, dashGap],
@@ -91756,9 +91776,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           to: new _ArrowView.Pixel(this.state.end.x, this.state.end.y),
           color: color,
           curveDelta: curveDelta,
+          width: width,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 120
+            lineNumber: 131
           }
         }), _react.default.createElement(_reactNative.View, {
           style: {
@@ -91766,7 +91787,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 128
+            lineNumber: 140
           }
         }, _react.default.createElement(_DraggableView.default, {
           onChanges: function onChanges(x, y) {
@@ -91780,7 +91801,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "Start",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 129
+            lineNumber: 141
           }
         }), _react.default.createElement(_DraggableView.default, {
           onChanges: function onChanges(x, y) {
@@ -91794,7 +91815,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "End",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 137
+            lineNumber: 149
           }
         })));
       }
@@ -92177,7 +92198,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             dash = _this$props.dash,
             cap = _this$props.cap,
             color = _this$props.color,
-            width = _this$props.width;
+            width = _this$props.width,
+            debug = _this$props.debug;
         var line = new Path();
         var _this$props2 = this.props,
             _this$props2$from = _this$props2.from,
@@ -92194,34 +92216,34 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           style: {
             zIndex: 100,
             borderColor: 'red',
-            borderWidth: 1,
+            borderWidth: debug ? 1 : 0,
             position: 'absolute'
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 152
+            lineNumber: 161
           }
         }, _react.default.createElement(Surface, {
           width: screenWidth,
           height: screenHeight,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 155
+            lineNumber: 169
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 156
+            lineNumber: 170
           }
         }, _react.default.createElement(Shape, {
           d: line,
-          strokeWidth: 2,
+          strokeWidth: width,
           stroke: color,
           strokeDash: dash,
           strokeCap: cap,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 157
+            lineNumber: 171
           }
         }), _react.default.createElement(Circle, {
           center: from,
@@ -92229,24 +92251,24 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           color: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 158
+            lineNumber: 172
           }
         }), _react.default.createElement(Shape, {
           d: this.arrowheadPath(from, to, 8),
-          strokeWidth: 2,
+          strokeWidth: width,
           stroke: color,
           fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 159
+            lineNumber: 173
           }
-        }), __DEV__ && _react.default.createElement(Circle, {
+        }), debug && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           color: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 165
+            lineNumber: 179
           }
         }))));
       }
@@ -92260,7 +92282,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     curveDelta: 80,
     cap: 'round',
     color: '#000',
-    width: 2
+    width: 2,
+    debug: false
   };
   exports.ArrowView = ArrowView = _wrapComponent("ArrowView")(ArrowView);
 
@@ -92288,7 +92311,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 186
+            lineNumber: 200
           }
         }));
       }

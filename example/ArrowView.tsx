@@ -29,6 +29,14 @@ interface ArrowViewProps {
   to: Pixel
 
   /**
+   * Enable debug mode for show:
+   *
+   * 1. border, when arrow can be rendered
+   * 2. curve pivot point
+   */
+  debug: boolean
+
+  /**
    * Dashed line config.
    *
    * Pass two digits by pattern [line-length, gap-between-lines]
@@ -76,6 +84,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     cap: 'round',
     color: '#000',
     width: 2,
+    debug: false,
   }
 
   /**
@@ -126,7 +135,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   }
 
   render() {
-    const { curveDelta, dash, cap, color, width } = this.props
+    const { curveDelta, dash, cap, color, width, debug } = this.props
     const line = new Path()
     const { from = this.zero, to = this.zero } = this.props
 
@@ -151,18 +160,23 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     return (
       <View
         pointerEvents="none"
-        style={{ zIndex: 100, borderColor: 'red', borderWidth: 1, position: 'absolute' }}>
+        style={{
+          zIndex: 100,
+          borderColor: 'red',
+          borderWidth: debug ? 1 : 0,
+          position: 'absolute',
+        }}>
         <Surface width={screenWidth} height={screenHeight}>
           <Group>
-            <Shape d={line} strokeWidth={2} stroke={color} strokeDash={dash} strokeCap={cap} />
+            <Shape d={line} strokeWidth={width} stroke={color} strokeDash={dash} strokeCap={cap} />
             <Circle center={from} radius={4} color={color} />
             <Shape
               d={this.arrowheadPath(from, to, 8)}
-              strokeWidth={2}
+              strokeWidth={width}
               stroke={color}
               fill={color}
             />
-            {__DEV__ && <Circle center={curve} radius={4} color={color} />}
+            {debug && <Circle center={curve} radius={4} color={color} />}
           </Group>
         </Surface>
       </View>

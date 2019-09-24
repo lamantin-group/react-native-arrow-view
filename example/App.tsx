@@ -48,12 +48,13 @@ export default class App extends Component {
     dashGap: 8,
     colorIndex: 0,
     curveDelta: 50,
+    width: 2,
   }
 
   colors = ['black', 'green', 'yellow', 'blue']
 
   render() {
-    const { dashLength, dashGap, curveDelta } = this.state
+    const { dashLength, dashGap, curveDelta, width } = this.state
     const color = this.colors[this.state.colorIndex]
     return (
       <SafeAreaView
@@ -102,6 +103,18 @@ export default class App extends Component {
             }
           />
 
+          <Text>Arrow width = {width}</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={16}
+            value={width}
+            onValueChange={value =>
+              this.setState({
+                width: value,
+              })
+            }
+          />
+
           <TouchableOpacity
             onPress={() =>
               this.setState({
@@ -121,6 +134,7 @@ export default class App extends Component {
           to={new Pixel(this.state.end.x, this.state.end.y)}
           color={color}
           curveDelta={curveDelta}
+          width={width}
         />
 
         <View style={{ alignItems: 'center' }}>
