@@ -92055,7 +92055,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         var curveX = maxOf(0, from.toTheLeftOf(to) ? from.x + (to.x - from.x) / 2 - this.deltaX : to.x + (to.x - to.x) / 2 - this.deltaX);
         var curveY = maxOf(0, to.above(from) ? to.y + (from.y - to.y) / 2 : to.y - (to.y - from.y) / 2);
         var curve = new Pixel(curveX, curveY);
-        line.moveTo(from.x, from.y).lineTo(to.x, to.y);
+        line.moveTo(from.x, from.y);
+        line.curveTo(curve.x, curve.y, to.x, to.y);
         return _react.default.createElement(_reactNative.View, {
           pointerEvents: "none",
           style: {
@@ -92066,19 +92067,19 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 58
           }
         }, _react.default.createElement(Surface, {
           width: width,
           height: height,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 61
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 61
+            lineNumber: 62
           }
         }, _react.default.createElement(Shape, {
           d: line,
@@ -92086,21 +92087,21 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 63
           }
         }), _react.default.createElement(Circle, {
           center: from,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 64
           }
         }), __DEV__ && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 65
           }
         }))));
       }
@@ -92133,7 +92134,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 85
           }
         }));
       }

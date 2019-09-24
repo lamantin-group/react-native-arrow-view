@@ -52,7 +52,8 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
     )
     const curve = new Pixel(curveX, curveY)
 
-    line.moveTo(from.x, from.y).lineTo(to.x, to.y)
+    line.moveTo(from.x, from.y)
+    line.curveTo(curve.x, curve.y, to.x, to.y)
     return (
       <View
         pointerEvents="none"
