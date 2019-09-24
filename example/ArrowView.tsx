@@ -24,7 +24,11 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
       <View style={{ zIndex: 100, borderColor: 'red', borderWidth: 1 }}>
         <Surface width={surfaceWidth} height={surfaceHeight}>
           <Group x={surfaceWidth / 2 - 90} y={surfaceHeight / 2 - 70}>
-            <Shape d={new Path().moveTo(0, 0).lineTo(100, 100)} strokeWidth={2} stroke="#000" />
+            <Shape
+              d={new Path().moveTo(from.x, from.y).lineTo(to.x, to.y)}
+              strokeWidth={2}
+              stroke="#000"
+            />
           </Group>
         </Surface>
       </View>

@@ -49,7 +49,7 @@ export default class App extends Component {
           height: '100%',
           width: '100%',
         }}>
-        <ArrowView />
+        <ArrowView from={this.state.start} to={this.state.end} />
         <DraggableView
           onChanges={(x, y) =>
             this.setState({
