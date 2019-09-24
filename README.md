@@ -1,73 +1,79 @@
-What is it
-----------
+react-native-arrow-view
+-----------------------
+`ArrowView` component for drawing pointers between components easely
 
-Bootstrap template for create libraries in React Native environment
+![v1.gif](.github/v1.gif)
 
-How to use it
--------------
-
-Clone repository in development folder (it is created automatically)
+Install
+-------
 ```bash
-git clone https://github.com/whalemare/react-native-library.git react-native-library-name
+npm install --save react-native-arrow-view
 ```
-
-Move into cloned folder
+or
 ```bash
-cd react-native-library-name
+yarn add react-native-arrow-view
 ```
 
-Check that sample started correctly
-```bash
-npm run start:first
+Example
+-------
+
+Add `ArrowView` to render function, pass to it absolute coordinates for drawing it self position.
+```js
+import { ArrowView } from 'react-native-arrow-view'
+
+render() {
+  return(
+    <ArrowView
+      from={{ x: 0, y: 0 }}
+      to={{ x: 100, y: 100 }}
+      // dash={[5, 10]} // optional: for define [dashLength, dashGap] 
+      // color={color} // optional: color of arrow
+      // curveDelta={curveDelta} // optional: for add more accuaracy
+      // width={width} // optional: width of arrow lines
+    />
+  )
+}
 ```
 
-Reset git repository
-```bash
-npm run git:reset
+If you dont know coordinates of your view, you can use `Measurable` component, that can calculate it for you
+```js
+import { ArrowView, Measurable } from 'react-native-arrow-view'
+
+render() {
+  return(
+    <View>
+      <ArrowView
+        from={this.state.fromCoordinates}
+        to={this.state.toCoordinates}
+      />
+
+      <Measurable onMeasure={(x: number, y: number, width: number, height: number) => {
+        this.setState({
+          fromCoordinates: {
+            x, y, width, height
+          }
+        })
+      }}>
+        <Text>From</Text>
+      </Measurable>
+
+      <Measurable onMeasure={(x: number, y: number, width: number, height: number) => {
+        this.setState({
+          toCoordinates: {
+            x, y, width, height
+          }
+        })
+      }}>
+        <Text>To</Text>
+      </Measurable>
+    </View>
+  )
+}
 ```
 
-Update library info in `package.json` to your own
-```json
-  "name": "react-native-library", // required for correct work renaming
-  "author": "whalemare", // required for correct work renaming
-  "version": "1.0.0",
-  "description": "Library bootstrap",
-  "license": "Apache 2.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/whalemare/react-native-library.git"
-  }
-```
+Also, you can modify your arrow position for more flexible configuration.
 
-Roadmap
---------
-
-Common
-- [x] TypeScript for library and example
-- [x] Properly configured example for library
-- [x] Autocomplete is working
-- [x] ESLint and Prettier
-- [x] .npmignore publish template
-- [x] Automatically generating typings when publish
-- [x] Hot library replacement in development 
-- [x] MIT License template
-- [x] VSCode configuration for run debugger
-- [ ] Hot reloading for example (working only live reload)
-- [ ] CI for checking build status
-
-Android features
-- [x] Android min api 16
-- [x] Android target api 29
-- [x] Kotlin 1.3.50
-- [x] Gradle 5.6.2
-- [x] Added most popular library-source repositories (jcenter, google, jitpack)
-- [ ] Fix local.properties to work on independent environment
-- [ ] Extensions mapper to language types from ReactNative types
-
-iOS features
-- [x] iOS library module support
-- [x] Swift support for library ios module
-
+If you have a question or need specific feature, feel free to [open an issue](https://github.com/lamantin-group/react-native-arrow-view/issues/new) or create pull request.
 ---
 
 ```

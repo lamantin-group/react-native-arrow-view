@@ -91758,8 +91758,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           }
         }, "Color: ", color))), _react.default.createElement(_reactNativeLibrary.ArrowView, {
           dash: [dashLength, dashGap],
-          from: new _reactNativeLibrary.Pixel(this.state.start.x, this.state.start.y),
-          to: new _reactNativeLibrary.Pixel(this.state.end.x, this.state.end.y),
+          from: {
+            x: this.state.start.x,
+            y: this.state.start.y
+          },
+          to: {
+            x: this.state.end.x,
+            y: this.state.end.y
+          },
           color: color,
           curveDelta: curveDelta,
           width: width,
@@ -92173,20 +92179,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       }
 
       _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(Measurable)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-      _this.onLayout = function (_ref) {
-        var nativeEvent = _ref.nativeEvent;
-        console.warn('onMeasure');
-
-        if (_this.marker) {
-          _this.marker.measure(function (x, y, width, height, pageX, pageY) {
-            var mX = Math.round(pageX).toFixed(0);
-            var mY = Math.round(pageY).toFixed(0);
-            onMeasure && onMeasure(mX, mY, width, height);
-          });
-        }
-      };
-
+      _this.marker = null;
       return _this;
     }
 
@@ -92201,11 +92194,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             borderColor: 'red',
             borderWidth: 1
           },
-          ref: function ref(_ref3) {
-            return _this2.marker = _ref3;
+          ref: function ref(_ref2) {
+            return _this2.marker = _ref2;
           },
-          onLayout: function onLayout(_ref2) {
-            var nativeEvent = _ref2.nativeEvent;
+          onLayout: function onLayout(_ref) {
+            var nativeEvent = _ref.nativeEvent;
             console.warn('onMeasure');
 
             if (_this2.marker) {
@@ -92218,7 +92211,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 14
           }
         }, this.props.children);
       }
@@ -94444,7 +94437,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Circle = exports.ArrowView = exports.Pixel = void 0;
+  exports.Circle = exports.ArrowView = void 0;
 
   var _extends2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/helpers/extends"));
 
@@ -94499,14 +94492,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var screenWidth = window.width;
   var screenHeight = window.height;
 
-  var Pixel = function () {
-    function Pixel(x, y) {
-      (0, _classCallCheck2.default)(this, Pixel);
+  var Point = function () {
+    function Point(x, y) {
+      (0, _classCallCheck2.default)(this, Point);
       this.x = +x;
       this.y = +y;
     }
 
-    (0, _createClass2.default)(Pixel, [{
+    (0, _createClass2.default)(Point, [{
       key: "toTheLeftOf",
       value: function toTheLeftOf(another) {
         return this.x < another.x;
@@ -94517,10 +94510,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         return this.y < another.y;
       }
     }]);
-    return Pixel;
+    return Point;
   }();
-
-  exports.Pixel = Pixel;
 
   var maxOf = function maxOf(first, second) {
     return Math.max(first, second);
@@ -94541,7 +94532,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       }
 
       _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(ArrowView)).call.apply(_getPrototypeOf2, [this].concat(args)));
-      _this.zero = new Pixel(0, 0);
+      _this.zero = new Point(0, 0);
       return _this;
     }
 
@@ -94580,14 +94571,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             width = _this$props.width,
             debug = _this$props.debug;
         var line = new Path();
-        var _this$props2 = this.props,
-            _this$props2$from = _this$props2.from,
-            from = _this$props2$from === void 0 ? this.zero : _this$props2$from,
-            _this$props2$to = _this$props2.to,
-            to = _this$props2$to === void 0 ? this.zero : _this$props2$to;
+        var from = this.props.from ? new Point(this.props.from.x, this.props.from.y) : this.zero;
+        var to = this.props.to ? new Point(this.props.to.x, this.props.to.y) : this.zero;
         var curveX = maxOf(0, from.toTheLeftOf(to) ? from.x + (to.x - from.x) / 2 - curveDelta : to.x + (to.x - to.x) / 2 - curveDelta);
         var curveY = maxOf(0, to.above(from) ? to.y + (from.y - to.y) / 2 : to.y - (to.y - from.y) / 2);
-        var curve = new Pixel(curveX, curveY);
+        var curve = new Point(curveX, curveY);
         line.moveTo(from.x, from.y);
         line.curveTo(curve.x, curve.y, to.x, to.y);
         return _react.default.createElement(_reactNative.View, {
@@ -94600,19 +94588,19 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 161
+            lineNumber: 167
           }
         }, _react.default.createElement(Surface, {
           width: screenWidth,
           height: screenHeight,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 169
+            lineNumber: 175
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 170
+            lineNumber: 176
           }
         }, _react.default.createElement(Shape, {
           d: line,
@@ -94622,7 +94610,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           strokeCap: cap,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 171
+            lineNumber: 177
           }
         }), _react.default.createElement(Circle, {
           center: from,
@@ -94630,7 +94618,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           color: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 172
+            lineNumber: 178
           }
         }), _react.default.createElement(Shape, {
           d: this.arrowheadPath(from, to, 8),
@@ -94639,7 +94627,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 173
+            lineNumber: 179
           }
         }), debug && _react.default.createElement(Circle, {
           center: curve,
@@ -94647,7 +94635,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           color: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 179
+            lineNumber: 185
           }
         }))));
       }
@@ -94677,11 +94665,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     (0, _createClass2.default)(Circle, [{
       key: "render",
       value: function render() {
-        var _this$props3 = this.props,
-            center = _this$props3.center,
-            radius = _this$props3.radius,
-            color = _this$props3.color,
-            rest = (0, _objectWithoutProperties2.default)(_this$props3, ["center", "radius", "color"]);
+        var _this$props2 = this.props,
+            center = _this$props2.center,
+            radius = _this$props2.radius,
+            color = _this$props2.color,
+            rest = (0, _objectWithoutProperties2.default)(_this$props2, ["center", "radius", "color"]);
         var circle = new Path().move(center.x, center.y).arc(0, radius * 2, radius).arc(0, radius * -2, radius);
         return _react.default.createElement(Shape, (0, _extends2.default)({}, rest, {
           d: circle,
@@ -94690,7 +94678,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           fill: color,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 200
+            lineNumber: 206
           }
         }));
       }

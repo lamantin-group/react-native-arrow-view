@@ -2,7 +2,7 @@
   "name": "react-native-arrow-view",
   "version": "1.0.0",
   "author": "lamantin",
-  "description": "Arrow pointer view between react-native components",
+  "description": "ArrowView component for drawing pointers between components easely",
   "license": "MIT",
   "repository": {
     "type": "git",

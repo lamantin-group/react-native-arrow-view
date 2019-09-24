@@ -6,7 +6,12 @@ const window = Dimensions.get('window')
 const screenWidth = window.width
 const screenHeight = window.height
 
-export class Pixel {
+export interface Pixel {
+  x: number
+  y: number
+}
+
+class Point implements Pixel {
   x: number
   y: number
 
@@ -76,7 +81,7 @@ interface ArrowViewProps {
 const maxOf = (first: number, second: number) => Math.max(first, second)
 
 export class ArrowView extends PureComponent<ArrowViewProps> {
-  zero: Pixel = new Pixel(0, 0)
+  zero: Point = new Point(0, 0)
 
   static defaultProps = {
     dash: [0, 0],
@@ -137,7 +142,8 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   render() {
     const { curveDelta, dash, cap, color, width, debug } = this.props
     const line = new Path()
-    const { from = this.zero, to = this.zero } = this.props
+    const from = this.props.from ? new Point(this.props.from.x, this.props.from.y) : this.zero
+    const to = this.props.to ? new Point(this.props.to.x, this.props.to.y) : this.zero
 
     const curveX = maxOf(
       0,
@@ -152,7 +158,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
         ? to.y + (from.y - to.y) / 2 //
         : to.y - (to.y - from.y) / 2 //
     )
-    const curve = new Pixel(curveX, curveY)
+    const curve = new Point(curveX, curveY)
 
     line.moveTo(from.x, from.y)
     line.curveTo(curve.x, curve.y, to.x, to.y)

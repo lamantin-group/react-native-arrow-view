@@ -109,8 +109,8 @@ export default class App extends Component {
 
         <ArrowView
           dash={[dashLength, dashGap]}
-          from={new Pixel(this.state.start.x, this.state.start.y)}
-          to={new Pixel(this.state.end.x, this.state.end.y)}
+          from={{ x: this.state.start.x, y: this.state.start.y }}
+          to={{ x: this.state.end.x, y: this.state.end.y }}
           color={color}
           curveDelta={curveDelta}
           width={width}
