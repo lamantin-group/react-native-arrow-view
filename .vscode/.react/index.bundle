@@ -91660,6 +91660,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             lineNumber: 43
           }
         }, _react.default.createElement(_ArrowView.ArrowView, {
+          dash: [10, 10],
           from: new _ArrowView.Pixel(this.state.start.x, this.state.start.y),
           to: new _ArrowView.Pixel(this.state.end.x, this.state.end.y),
           __source: {
@@ -91678,7 +91679,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "Start",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 56
+            lineNumber: 57
           }
         }), _react.default.createElement(_DraggableView.default, {
           onChanges: function onChanges(x, y) {
@@ -91692,7 +91693,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           text: "End",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 65
           }
         }));
       }
@@ -92069,13 +92070,16 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     }, {
       key: "render",
       value: function render() {
-        var curveDelta = this.props.curveDelta;
-        var line = new Path();
         var _this$props = this.props,
-            _this$props$from = _this$props.from,
-            from = _this$props$from === void 0 ? this.zero : _this$props$from,
-            _this$props$to = _this$props.to,
-            to = _this$props$to === void 0 ? this.zero : _this$props$to;
+            curveDelta = _this$props.curveDelta,
+            dash = _this$props.dash,
+            cap = _this$props.cap;
+        var line = new Path();
+        var _this$props2 = this.props,
+            _this$props2$from = _this$props2.from,
+            from = _this$props2$from === void 0 ? this.zero : _this$props2$from,
+            _this$props2$to = _this$props2.to,
+            to = _this$props2$to === void 0 ? this.zero : _this$props2$to;
         var curveX = maxOf(0, from.toTheLeftOf(to) ? from.x + (to.x - from.x) / 2 - curveDelta : to.x + (to.x - to.x) / 2 - curveDelta);
         var curveY = maxOf(0, to.above(from) ? to.y + (from.y - to.y) / 2 : to.y - (to.y - from.y) / 2);
         var curve = new Pixel(curveX, curveY);
@@ -92091,35 +92095,36 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 127
+            lineNumber: 130
           }
         }, _react.default.createElement(Surface, {
           width: width,
           height: height,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 130
+            lineNumber: 133
           }
         }, _react.default.createElement(Group, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 131
+            lineNumber: 134
           }
         }, _react.default.createElement(Shape, {
           d: line,
           strokeWidth: 2,
           stroke: "#000",
-          strokeDash: [3, 5],
+          strokeDash: dash,
+          strokeCap: cap,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 132
+            lineNumber: 135
           }
         }), _react.default.createElement(Circle, {
           center: from,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 133
+            lineNumber: 136
           }
         }), _react.default.createElement(Shape, {
           d: this.arrowheadPath(from, to, 8),
@@ -92127,14 +92132,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 134
+            lineNumber: 137
           }
         }), __DEV__ && _react.default.createElement(Circle, {
           center: curve,
           radius: 4,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 135
+            lineNumber: 138
           }
         }))));
       }
@@ -92145,7 +92150,8 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   exports.ArrowView = ArrowView;
   ArrowView.defaultProps = {
     dash: [0, 0],
-    curveDelta: 80
+    curveDelta: 80,
+    cap: 'round'
   };
   exports.ArrowView = ArrowView = _wrapComponent("ArrowView")(ArrowView);
 
@@ -92160,10 +92166,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     (0, _createClass2.default)(Circle, [{
       key: "render",
       value: function render() {
-        var _this$props2 = this.props,
-            center = _this$props2.center,
-            radius = _this$props2.radius,
-            rest = (0, _objectWithoutProperties2.default)(_this$props2, ["center", "radius"]);
+        var _this$props3 = this.props,
+            center = _this$props3.center,
+            radius = _this$props3.radius,
+            rest = (0, _objectWithoutProperties2.default)(_this$props3, ["center", "radius"]);
         var circle = new Path().move(center.x, center.y).arc(0, radius * 2, radius).arc(0, radius * -2, radius);
         return _react.default.createElement(Shape, (0, _extends2.default)({}, rest, {
           d: circle,
@@ -92171,7 +92177,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           stroke: "#000",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 155
+            lineNumber: 158
           }
         }));
       }

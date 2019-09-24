@@ -50,6 +50,7 @@ export default class App extends Component {
           width: '100%',
         }}>
         <ArrowView
+          dash={[10, 10]}
           from={new Pixel(this.state.start.x, this.state.start.y)}
           to={new Pixel(this.state.end.x, this.state.end.y)}
         />

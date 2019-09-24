@@ -41,6 +41,8 @@ interface ArrowViewProps {
    * @default 80
    */
   curveDelta: number
+
+  cap: 'butt' | 'round' | 'square'
 }
 
 const maxOf = (first: number, second: number) => Math.max(first, second)
@@ -51,6 +53,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   static defaultProps = {
     dash: [0, 0],
     curveDelta: 80,
+    cap: 'round',
   }
 
   /**
@@ -101,7 +104,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
   }
 
   render() {
-    const { curveDelta } = this.props
+    const { curveDelta, dash, cap } = this.props
     const line = new Path()
     const { from = this.zero, to = this.zero } = this.props
 
@@ -129,7 +132,7 @@ export class ArrowView extends PureComponent<ArrowViewProps> {
         style={{ zIndex: 100, borderColor: 'red', borderWidth: 1, position: 'absolute' }}>
         <Surface width={width} height={height}>
           <Group>
-            <Shape d={line} strokeWidth={2} stroke="#000" strokeDash={[3, 5]} />
+            <Shape d={line} strokeWidth={2} stroke="#000" strokeDash={dash} strokeCap={cap} />
             <Circle center={from} radius={4} />
             <Shape d={this.arrowheadPath(from, to, 8)} strokeWidth={2} stroke="#000" />
             {__DEV__ && <Circle center={curve} radius={4} />}
