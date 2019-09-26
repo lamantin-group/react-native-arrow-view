@@ -14,8 +14,6 @@ export class Measurable extends PureComponent<MeasurableProps> {
       <View
         ref={ref => (this.marker = ref)}
         onLayout={() => {
-          console.warn('onMeasure')
-
           if (this.marker) {
             this.marker.measure((_x, _y, width, height, pageX, pageY) => {
               const mX = Math.round(pageX).toFixed(0)
