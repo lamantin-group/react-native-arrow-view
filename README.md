@@ -14,6 +14,11 @@ or
 yarn add react-native-arrow-view
 ```
 
+For iOS you should add to your Podspec next line:
+```ruby
+pod 'React-ART', :path => '../node_modules/react-native/Libraries/ART'
+```
+
 Example
 -------
 
