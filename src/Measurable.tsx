@@ -1,18 +1,17 @@
 import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 
-export type DraggableViewProps = {
+export type MeasurableProps = {
   onMeasure: (x: number, y: number, width: number, height: number) => void
 }
 
-export class Measurable extends PureComponent<DraggableViewProps> {
+export class Measurable extends PureComponent<MeasurableProps> {
   marker: View | null = null
 
   render() {
     const { onMeasure } = this.props
     return (
       <View
-        style={{ borderColor: 'red', borderWidth: 1 }}
         ref={ref => (this.marker = ref)}
         onLayout={() => {
           console.warn('onMeasure')
