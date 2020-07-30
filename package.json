@@ -33,7 +33,8 @@
   },
   "peerDependencies": {
     "react": "^16.9.0",
-    "react-native": "^0.41.2"
+    "react-native": "^0.41.2",
+    "@react-native-community/art": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
