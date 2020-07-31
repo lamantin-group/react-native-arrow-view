@@ -1,7 +1,8 @@
 import { Color } from 'csstype'
 import React, { PureComponent } from 'react'
-import { ART, Dimensions, View } from 'react-native'
-const { Surface, Shape, Group, Path } = ART
+import {  Dimensions, View } from 'react-native';
+import { Surface, Shape, Group, Path } from "@react-native-community/art";
+
 const window = Dimensions.get('window')
 const screenWidth = window.width
 const screenHeight = window.height
